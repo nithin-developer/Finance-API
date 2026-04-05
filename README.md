@@ -41,6 +41,7 @@ The system is designed for organizational finance tracking, where data is global
 
 ## Project Structure
 
+```text
 app/
 ├── main.py
 ├── core/
@@ -59,6 +60,7 @@ alembic/
 └── versions/
 
 tests/
+```
 
 ---
 
