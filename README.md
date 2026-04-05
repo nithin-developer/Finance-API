@@ -41,25 +41,63 @@ The system is designed for organizational finance tracking, where data is global
 
 ## Project Structure
 
-```text
-app/
-├── main.py
-├── core/
-│   ├── config.py
-│   ├── errors.py
-│   └── security.py
-├── db/
-│   └── database.py
-├── models/
-├── schemas/
-├── routes/
-├── services/
-└── dependencies/
 
-alembic/
-└── versions/
+```
+finance-backend
+├─ alembic
+│  ├─ env.py
+│  ├─ script.py.mako
+│  └─ versions
+│     └─ 0001_initial_schema.py
+├─ alembic.ini
+├─ app
+│  ├─ core
+│  │  ├─ config.py
+│  │  ├─ errors.py
+│  │  ├─ security.py
+│  │  └─ __init__.py
+│  ├─ db
+│  │  ├─ database.py
+│  │  └─ __init__.py
+│  ├─ dependencies
+│  │  ├─ auth.py
+│  │  ├─ rbac.py
+│  │  └─ __init__.py
+│  ├─ main.py
+│  ├─ models
+│  │  ├─ audit_log.py
+│  │  ├─ financial_record.py
+│  │  ├─ user.py
+│  │  └─ __init__.py
+│  ├─ routes
+│  │  ├─ auth.py
+│  │  ├─ dashboard.py
+│  │  ├─ records.py
+│  │  ├─ users.py
+│  │  └─ __init__.py
+│  ├─ schemas
+│  │  ├─ auth.py
+│  │  ├─ common.py
+│  │  ├─ dashboard.py
+│  │  ├─ record.py
+│  │  ├─ user.py
+│  │  └─ __init__.py
+│  ├─ services
+│  │  ├─ audit_service.py
+│  │  ├─ dashboard_service.py
+│  │  ├─ record_service.py
+│  │  └─ __init__.py
+│  └─ __init__.py
+├─ README.md
+├─ requirements.txt
+└─ tests
+   ├─ conftest.py
+   ├─ test_auth.py
+   ├─ test_dashboard.py
+   ├─ test_rbac.py
+   ├─ test_records.py
+   └─ __init__.py
 
-tests/
 ```
 
 ---
@@ -301,3 +339,5 @@ pytest -q
 This project focuses on clean backend architecture, correct data handling, and clear API design rather than unnecessary complexity.
 
 ---
+
+> Thanks for checking out the Finance Dashboard Backend API! Feel free to explore the code and reach out if you have any questions or suggestions. Built with ❤️ by Nithin.
