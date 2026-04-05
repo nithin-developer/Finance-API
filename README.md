@@ -24,6 +24,8 @@ The system is designed for organizational finance tracking, where data is global
 * Soft delete for data safety
 * Uses Decimal-safe money fields (`NUMERIC(14,2)`), not floats.
 * Audit logging support
+* Configurable CORS middleware
+* Configurable per-client rate limiting with 429 protection (SlowAPI)
 * Structured error handling
 
 ---
@@ -31,6 +33,7 @@ The system is designed for organizational finance tracking, where data is global
 ## Tech Stack
 
 * FastAPI
+* SlowAPI (rate limiting)
 * SQLAlchemy 2.0 (async)
 * PostgreSQL (asyncpg)
 * Alembic (migrations)
@@ -120,8 +123,24 @@ Copy `.env.example` to `.env` and configure:
 * SECRET_KEY
 * FIRST_ADMIN_EMAIL
 * FIRST_ADMIN_PASSWORD
+* CORS_ALLOW_ORIGINS
+* RATE_LIMIT_REQUESTS
+* RATE_LIMIT_WINDOW_SECONDS
 
 If AUTO_CREATE_TABLES=true, tables will be created automatically on startup for local development.
+
+Recommended for local frontend integration:
+
+* `CORS_ALLOW_ORIGINS=http://localhost:3000,http://127.0.0.1:3000`
+* `CORS_ALLOW_METHODS=GET,POST,PUT,PATCH,DELETE,OPTIONS`
+* `CORS_ALLOW_HEADERS=Authorization,Content-Type`
+
+Rate limiting defaults:
+
+* `RATE_LIMIT_ENABLED=true`
+* `RATE_LIMIT_REQUESTS=100`
+* `RATE_LIMIT_WINDOW_SECONDS=60`
+* `RATE_LIMIT_EXEMPT_PATHS=/health,/docs,/redoc,/openapi.json`
 
 ---
 
@@ -296,6 +315,7 @@ Common status codes:
 * 403: Forbidden
 * 404: Not Found
 * 422: Validation Error
+* 429: Too Many Requests (rate limit exceeded)
 
 ---
 
